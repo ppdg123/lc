@@ -11,7 +11,7 @@ public:
         int a, b;
         vector<int> cand;
     };
-    void dfs(vector<vector<char>>& board,int cur) {
+    void dfs(vector<vector<char> >& board,int cur) {
         if (cur >= dfsn.size()) ans = true;
         if (ans) return;
         int a = dfsn[cur].a;
@@ -25,6 +25,7 @@ public:
                 svis[sq][tmp] = 1;
                 board[a][b] = '1' + tmp;
                 dfs(board,cur+1);
+		if(ans) return;
                 rvis[a][tmp] = 0;
                 cvis[b][tmp] = 0;
                 svis[sq][tmp] = 0;
@@ -46,7 +47,7 @@ public:
     static bool cmp(struct node a, struct node b) {
         return a.cand.size() < b.cand.size();
     }
-    void solveSudoku(vector<vector<char>>& board) {
+    void solveSudoku(vector<vector<char> >& board) {
         memset(rvis,0,sizeof(rvis));
         memset(cvis,0,sizeof(cvis));
         memset(svis,0,sizeof(svis));
@@ -83,7 +84,7 @@ public:
 };
 
 int main(){
-    vector<vector<char>> board = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
+    vector<vector<char> > board = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
     class Solution a;
     a.solveSudoku(board);
     for (int i = 0; i < 9; ++i){
